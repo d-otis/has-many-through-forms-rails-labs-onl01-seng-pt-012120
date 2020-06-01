@@ -1,13 +1,17 @@
 <h1><%= @post.title %></h1>
 <p><%= @post.content %></p>
 <h2>Categories:</h2>
-<% @post.categories.each do |cat| %>
-	<%= cat.name %>
+<% @post.categories.each.with_index do |cat, index| %>
+	<%= cat.name %><%= ", " if index < @post.categories.size - 1%>
 <% end %>
 <h3>Comments:</h3>
 <%= "None" if @post.comments.count == 0 %>
 <% @post.comments.each do |comment| %>
-	<p><%= comment.content %></p>
-	&mdash; <%= comment.username %>
+	<p><%= "#{comment.username} says: #{comment.content}" %></p> 
 <% end %>
+<h4>Commentors:</h4>
+<% @post.unique_users.each do |user| %>
+	<%= link_to user.username, user_path(user) %>
+<% end %>
+
 <%= render 'comments/form' %>
