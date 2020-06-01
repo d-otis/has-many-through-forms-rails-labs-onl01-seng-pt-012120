@@ -6,5 +6,4 @@ class Post < ActiveRecord::Base
 
   accepts_nested_attributes_for :categories, reject_if: :all_blank
 
-
 end
